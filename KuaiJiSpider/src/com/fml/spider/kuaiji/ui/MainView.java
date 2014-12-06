@@ -7,11 +7,17 @@ package com.fml.spider.kuaiji.ui;
 
 import com.fml.spider.kuaiji.model.City;
 import com.fml.spider.kuaiji.CityManager;
+<<<<<<< HEAD
 import com.fml.spider.kuaiji.UserManager;
 import com.fml.spider.kuaiji.framework.impl.SoundPlay;
 import com.fml.spider.kuaiji.WorkThread;
 import com.fml.spider.kuaiji.framework.Sound;
 import com.fml.spider.kuaiji.model.User;
+=======
+import com.fml.spider.kuaiji.framework.impl.SoundPlay;
+import com.fml.spider.kuaiji.WorkThread;
+import com.fml.spider.kuaiji.framework.Sound;
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
 import com.fml.spider.kuaiji.spider.Spider;
 import com.fml.spider.kuaiji.spider.impl.KuaijiSpider;
 import java.awt.event.MouseAdapter;
@@ -31,10 +37,16 @@ import javax.swing.table.TableModel;
  */
 public class MainView extends javax.swing.JFrame {
 
+<<<<<<< HEAD
     private CityManager am = null;
     private UserManager um = null;
     private Spider spider = null;
     private Sound sound = null;
+=======
+    private CityManager am;
+    private Spider spider;
+    private Sound sound;
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
     private String soundPath = "sound.wav";
 
     /**
@@ -53,24 +65,37 @@ public class MainView extends javax.swing.JFrame {
 
         am = new CityManager(spider) {
             @Override
+<<<<<<< HEAD
             public void onCityStatusUpdate(int index) {
+=======
+            public void cityStatusUpdate(int index) {
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
 
                 City city = this.getACity(index);
 
                 if (city != null) {
 
+<<<<<<< HEAD
                     updataCityTable(index, city);
+=======
+                    updataTable(index, city);
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
 
                 }
             }
 
             @Override
+<<<<<<< HEAD
             public void onAddNewCity(City city) {
+=======
+            public void addNewCity(City city) {
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
                 addCityToTableItem(city);
             }
 
         };
 
+<<<<<<< HEAD
         um = new UserManager() {
 
             @Override
@@ -87,13 +112,23 @@ public class MainView extends javax.swing.JFrame {
 
     void addCityToTableItem(City city) {
 
+=======
+        am.work();
+        
+    }
+
+    void addCityToTableItem(City city) {
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
         Object o[] = new Object[]{city.needTest, city.cityName, (city.enableReq ? "可报名" : "不可报名"), city.reqStatus, city.netInfo};
         model.addRow(o);
 
+<<<<<<< HEAD
         this.jComboBox1.addItem(city.cityName);
 
+=======
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
     }
 
     private void initUI() {
@@ -157,6 +192,7 @@ public class MainView extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+<<<<<<< HEAD
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jPanel4 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
@@ -170,6 +206,8 @@ public class MainView extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+=======
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
@@ -262,14 +300,22 @@ public class MainView extends javax.swing.JFrame {
         jDesktopPane2Layout.setHorizontalGroup(
             jDesktopPane2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<<<<<<< HEAD
             .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+=======
+            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
         );
         jDesktopPane2Layout.setVerticalGroup(
             jDesktopPane2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jDesktopPane2Layout.createSequentialGroup()
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 33, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+<<<<<<< HEAD
                 .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+=======
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
                 .add(13, 13, 13))
         );
         jDesktopPane2.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -279,6 +325,7 @@ public class MainView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("测试", jPanel1);
 
+<<<<<<< HEAD
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
 
         jDesktopPane1.setBackground(new java.awt.Color(240, 240, 240));
@@ -368,6 +415,18 @@ public class MainView extends javax.swing.JFrame {
         jDesktopPane1.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPanel3.add(jDesktopPane1);
+=======
+        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 591, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 359, Short.MAX_VALUE)
+        );
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
 
         jTabbedPane1.addTab("报名", jPanel3);
 
@@ -444,6 +503,7 @@ public class MainView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+<<<<<<< HEAD
     //加入用户
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
@@ -480,6 +540,8 @@ public class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
+=======
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
     private List<WorkThread> threadList = new ArrayList<>();
 
     void changeThreadSleep() {
@@ -499,7 +561,11 @@ public class MainView extends javax.swing.JFrame {
 
     }
 
+<<<<<<< HEAD
     private void updataCityTable(int index, City city) {
+=======
+    public void updataTable(int index, City city) {
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
 
         TableModel model = this.jTable1.getModel();
         model.setValueAt((city.enableReq ? "可报名" : "不可报名"), index, 2);
@@ -512,6 +578,7 @@ public class MainView extends javax.swing.JFrame {
 
     }
 
+<<<<<<< HEAD
     private void updateUserTable() {
 
         List<User> us = um.getUserList();
@@ -538,6 +605,8 @@ public class MainView extends javax.swing.JFrame {
 
     }
 
+=======
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
     /**
      * @param args the command line arguments
      */
@@ -549,7 +618,11 @@ public class MainView extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
@@ -580,14 +653,18 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+<<<<<<< HEAD
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
+=======
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+<<<<<<< HEAD
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -606,5 +683,16 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+=======
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
     // End of variables declaration//GEN-END:variables
 }

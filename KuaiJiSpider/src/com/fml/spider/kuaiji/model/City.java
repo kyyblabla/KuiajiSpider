@@ -20,9 +20,15 @@ public class City {
 
     @Override
     public String toString() {
+<<<<<<< HEAD
         return "City{" + "cityName=" + cityName + ", cityCode=" + cityCode + ", enableReq=" + enableReq + ", reqStatus=" + reqStatus + ", needTest=" + needTest + ", netInfo=" + netInfo + '}';
     }
 
     
 
+=======
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+>>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
 }
