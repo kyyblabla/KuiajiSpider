@@ -1,1 +1,4 @@
 *.class
+build
+/KuaiJiSpider/dist
+/KuaiJiSpider/会计报名状态获取
