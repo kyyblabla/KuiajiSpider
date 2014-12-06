@@ -21,7 +21,7 @@ public class UserServerImpl implements UserServer {
 
     public UserServerImpl() {
 
-        UserDao u = new UserDaoImpl();
+        userDao = new UserDaoImpl();
 
     }
 

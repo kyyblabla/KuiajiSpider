@@ -23,9 +23,10 @@ import java.util.logging.Logger;
  * @author ky
  */
 public class DataSource {
-    
-   
-    public List<String> reader(String path) throws Exception {
+
+    String path = "E://lines.txt";
+
+    public List<String> reader() throws Exception {
 
         List<String> lines = new ArrayList<>();
 
@@ -48,7 +49,7 @@ public class DataSource {
 
     }
 
-    public void writer(String path, String... lines) throws Exception {
+    public void writer(String... lines) throws Exception {
 
         File f = new File(path);
 
@@ -66,10 +67,9 @@ public class DataSource {
             buff.newLine();
 
         }
-        
-         buff.close();
+
+        buff.close();
         fw.close();
-       
 
     }
 
@@ -77,7 +77,7 @@ public class DataSource {
 
         DataSource ds = new DataSource();
 
-        List<String> reader = ds.reader("E://lines.txt");
+        List<String> reader = ds.reader();
 
         for (String reader1 : reader) {
             System.out.println(reader1);
@@ -89,14 +89,14 @@ public class DataSource {
 
         DataSource ds = new DataSource();
 
-        ds.writer("E://lines.txt", info);
+        ds.writer(info);
 
     }
 
     public static void main(String[] args) throws Exception {
 
         testRreader();
-        String s[]={"111","222"};
+        String s[] = {"111", "222"};
         testWriter(s);
         System.out.println("hhhhhhhhhhhhhh");
         testRreader();

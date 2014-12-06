@@ -74,6 +74,17 @@ public abstract class CityManager {
 
     }
 
+    public City getACity(String code) {
+
+        for (City c : cityList) {
+            if (c.cityCode.equals(code)) {
+                return c;
+            }
+        }
+        return null;
+
+    }
+
     public boolean isInCityList(City city) {
 
         for (City c : cityList) {
@@ -104,7 +115,7 @@ public abstract class CityManager {
                         boolean inCityList = isInCityList(ec);
                         if (inCityList != true) {
                             cityList.add(ec);
-                            addNewCity(ec);
+                            onAddNewCity(ec);
                         }
                     }
 
@@ -131,7 +142,7 @@ public abstract class CityManager {
                         boolean inCityList = isInCityList(ec);
                         if (inCityList != true) {
                             cityList.add(ec);
-                            addNewCity(ec);
+                            onAddNewCity(ec);
                         }
                     }
                 } catch (Exception ex) {
@@ -181,7 +192,7 @@ public abstract class CityManager {
 
                 if (city.cityCode.equals(newCity.cityCode)) {
 
-                    cityStatusUpdate(i);
+                    onCityStatusUpdate(i);
 
                     break;
                 }
@@ -191,8 +202,8 @@ public abstract class CityManager {
 
     }
 
-    public abstract void cityStatusUpdate(int index);
+    public abstract void onCityStatusUpdate(int index);
 
-    public abstract void addNewCity(City city);
+    public abstract void onAddNewCity(City city);
 
 }

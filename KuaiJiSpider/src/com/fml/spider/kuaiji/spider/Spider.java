@@ -5,7 +5,7 @@
  */
 package com.fml.spider.kuaiji.spider;
 
-import com.fml.spider.kuaiji.CityStatu;
+import com.fml.spider.kuaiji.model.CityStatu;
 import com.fml.spider.kuaiji.model.City;
 import java.io.IOException;
 import java.util.List;

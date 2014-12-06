@@ -5,9 +5,9 @@
  */
 package com.fml.spider.kuaiji;
 
+import com.fml.spider.kuaiji.model.CityStatu;
 import com.fml.spider.kuaiji.model.City;
 import com.fml.spider.kuaiji.spider.Spider;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fml.spider.kuaiji;
+package com.fml.spider.kuaiji.model;
 
 /**
  *
@@ -16,8 +16,9 @@ public class CityStatu {
         this.code = code;
         this.info = info;
     }
-    int code = 0;
-    String info = "";
+
+    public int code = 0;
+    public String info = "";
 
     @Override
     public String toString() {

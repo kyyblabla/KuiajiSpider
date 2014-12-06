@@ -20,7 +20,6 @@ import java.util.logging.Logger;
 public class UserDaoImpl implements UserDao {
 
     private DataSource ds;
-    private static final String PATH = "E:/kuaji/tets.txt";
 
     public UserDaoImpl() {
 
@@ -31,19 +30,13 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getUsers() {
 
-//        String userName;
-//        String passWord;
-//        String cityCode;
-//        boolean success = false;
         List<User> users = new ArrayList<>();
         try {
-            List<String> readers = ds.reader(PATH);
+            List<String> readers = ds.reader();
 
             for (String reader : readers) {
-
-                String[] split = reader.split("#");
-                User u = new User(split[0], split[1], split[2], split[3].equals("1"));
-
+                User u = new User(reader);
+                users.add(u);
             }
 
         } catch (Exception ex) {
@@ -58,15 +51,16 @@ public class UserDaoImpl implements UserDao {
     public boolean setUsers(List<User> users) {
 
         try {
-            List<String> lines = new ArrayList<>();
+            String lines[] = new String[users.size()];
 
+            int i = 0;
             for (User u : users) {
 
-                String line = u.getUserName() + "#" + u.getPassWord() + "#" + u.getUserName() + "#" + (u.isSuccess() ? "1" : "0");
-                lines.add(line);
+                String line = u.toString();
+                lines[i++] = line;
             }
 
-            ds.writer(PATH, (String[]) lines.toArray());
+            ds.writer(lines);
 
             return true;
 
@@ -79,6 +73,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     public static void main(String[] args) {
+
+        List<User> users = new ArrayList<>();
+
+        users.add(new User("kyy1#123#412828#1"));
+        users.add(new User("kyy2#123#412828#1"));
+        users.add(new User("kyy3#123#412828#1"));
+
+        new UserDaoImpl().setUsers(users);
 
     }
 

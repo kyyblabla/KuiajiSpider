@@ -7,9 +7,11 @@ package com.fml.spider.kuaiji.ui;
 
 import com.fml.spider.kuaiji.model.City;
 import com.fml.spider.kuaiji.CityManager;
+import com.fml.spider.kuaiji.UserManager;
 import com.fml.spider.kuaiji.framework.impl.SoundPlay;
 import com.fml.spider.kuaiji.WorkThread;
 import com.fml.spider.kuaiji.framework.Sound;
+import com.fml.spider.kuaiji.model.User;
 import com.fml.spider.kuaiji.spider.Spider;
 import com.fml.spider.kuaiji.spider.impl.KuaijiSpider;
 import java.awt.event.MouseAdapter;
@@ -29,9 +31,10 @@ import javax.swing.table.TableModel;
  */
 public class MainView extends javax.swing.JFrame {
 
-    private CityManager am;
-    private Spider spider;
-    private Sound sound;
+    private CityManager am = null;
+    private UserManager um = null;
+    private Spider spider = null;
+    private Sound sound = null;
     private String soundPath = "sound.wav";
 
     /**
@@ -50,33 +53,46 @@ public class MainView extends javax.swing.JFrame {
 
         am = new CityManager(spider) {
             @Override
-            public void cityStatusUpdate(int index) {
+            public void onCityStatusUpdate(int index) {
 
                 City city = this.getACity(index);
 
                 if (city != null) {
 
-                    updataTable(index, city);
+                    updataCityTable(index, city);
 
                 }
             }
 
             @Override
-            public void addNewCity(City city) {
+            public void onAddNewCity(City city) {
                 addCityToTableItem(city);
             }
 
         };
 
+        um = new UserManager() {
+
+            @Override
+            public void onUserListUpdata() {
+                updateUserTable();
+            }
+        };
+
         am.work();
-        
+
+        um.work();
+
     }
 
     void addCityToTableItem(City city) {
+
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
         Object o[] = new Object[]{city.needTest, city.cityName, (city.enableReq ? "可报名" : "不可报名"), city.reqStatus, city.netInfo};
         model.addRow(o);
+
+        this.jComboBox1.addItem(city.cityName);
 
     }
 
@@ -141,6 +157,19 @@ public class MainView extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jPanel4 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
@@ -233,14 +262,14 @@ public class MainView extends javax.swing.JFrame {
         jDesktopPane2Layout.setHorizontalGroup(
             jDesktopPane2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
         );
         jDesktopPane2Layout.setVerticalGroup(
             jDesktopPane2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jDesktopPane2Layout.createSequentialGroup()
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 33, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                 .add(13, 13, 13))
         );
         jDesktopPane2.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -250,16 +279,95 @@ public class MainView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("测试", jPanel1);
 
-        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 591, Short.MAX_VALUE)
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+
+        jDesktopPane1.setBackground(new java.awt.Color(240, 240, 240));
+        jDesktopPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("报名账户列表"));
+
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        jButton6.setText("删除");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton6);
+
+        jComboBox1.setLightWeightPopupEnabled(false);
+        jComboBox1.setMaximumSize(new java.awt.Dimension(100, 32767));
+        jComboBox1.setMinimumSize(new java.awt.Dimension(100, 21));
+        jComboBox1.setPreferredSize(new java.awt.Dimension(100, 25));
+        jPanel4.add(jComboBox1);
+
+        jLabel4.setText("姓名");
+        jPanel4.add(jLabel4);
+
+        jTextField1.setText("tets");
+        jTextField1.setMinimumSize(new java.awt.Dimension(80, 30));
+        jTextField1.setPreferredSize(new java.awt.Dimension(80, 25));
+        jPanel4.add(jTextField1);
+
+        jLabel6.setText("密码");
+        jPanel4.add(jLabel6);
+
+        jTextField2.setText("123456");
+        jTextField2.setMinimumSize(new java.awt.Dimension(80, 30));
+        jTextField2.setPreferredSize(new java.awt.Dimension(80, 25));
+        jPanel4.add(jTextField2);
+
+        jLabel5.setText("身份证");
+        jPanel4.add(jLabel5);
+
+        jTextField3.setText("131314257654543456");
+        jTextField3.setMinimumSize(new java.awt.Dimension(140, 30));
+        jTextField3.setPreferredSize(new java.awt.Dimension(140, 25));
+        jPanel4.add(jTextField3);
+
+        jButton5.setText("添加");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton5);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "报名", "姓名", "考区", "报名状态", "执行状态", "身份证", "密码"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTable2);
+
+        org.jdesktop.layout.GroupLayout jDesktopPane1Layout = new org.jdesktop.layout.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 359, Short.MAX_VALUE)
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jDesktopPane1Layout.createSequentialGroup()
+                .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE))
         );
+        jDesktopPane1.setLayer(jPanel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jPanel3.add(jDesktopPane1);
 
         jTabbedPane1.addTab("报名", jPanel3);
 
@@ -336,6 +444,42 @@ public class MainView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+    //加入用户
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+        String name = jTextField1.getText().trim();
+        String pass = jTextField2.getText().trim();
+        String carCode = jTextField3.getText().trim();
+        String cityCode = "";
+        int index = jComboBox1.getSelectedIndex();
+
+        if (index == -1) {
+            return;
+        }
+
+        City city = am.getACity(index);
+
+        if (city != null) {
+            cityCode = city.cityCode;
+        }
+
+        if (name.isEmpty() || pass.isEmpty() || carCode.isEmpty() || cityCode.isEmpty()) {
+            return;
+        }
+
+        User user = new User(name, pass, cityCode, carCode);
+
+        boolean add = um.addUser(user);
+
+        System.out.println(add);
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    //删除用户
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     private List<WorkThread> threadList = new ArrayList<>();
 
     void changeThreadSleep() {
@@ -355,7 +499,7 @@ public class MainView extends javax.swing.JFrame {
 
     }
 
-    public void updataTable(int index, City city) {
+    private void updataCityTable(int index, City city) {
 
         TableModel model = this.jTable1.getModel();
         model.setValueAt((city.enableReq ? "可报名" : "不可报名"), index, 2);
@@ -364,6 +508,32 @@ public class MainView extends javax.swing.JFrame {
 
         if (city.enableReq == true) {
             sound.play();
+        }
+
+    }
+
+    private void updateUserTable() {
+
+        List<User> us = um.getUserList();
+
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(us.size());
+
+        int i = 0;
+        for (User u : us) {
+
+            City city = am.getACity(u.getCityCode());
+            String cityName = (city != null) ? city.cityName : "";
+
+            model.setValueAt(false, i, 0);
+            model.setValueAt(u.getUserName(), i, 1);
+            model.setValueAt(cityName, i, 2);
+            model.setValueAt((u.isSuccess() ? "报名成功" : "未报名"), i, 3);
+            model.setValueAt("", i, 4);
+            model.setValueAt(u.getCardCode(), i, 5);
+            model.setValueAt(u.getPassWord(), i, 6);
+
+            ++i;
         }
 
     }
@@ -379,7 +549,7 @@ public class MainView extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                
+
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
@@ -410,18 +580,31 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
