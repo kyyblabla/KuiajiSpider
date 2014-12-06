@@ -5,11 +5,7 @@
  */
 package com.fml.spider.kuaiji.spider;
 
-<<<<<<< HEAD
 import com.fml.spider.kuaiji.model.CityStatu;
-=======
-import com.fml.spider.kuaiji.CityStatu;
->>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
 import com.fml.spider.kuaiji.model.City;
 import java.io.IOException;
 import java.util.List;

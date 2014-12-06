@@ -74,7 +74,6 @@ public abstract class CityManager {
 
     }
 
-<<<<<<< HEAD
     public City getACity(String code) {
 
         for (City c : cityList) {
@@ -86,8 +85,6 @@ public abstract class CityManager {
 
     }
 
-=======
->>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
     public boolean isInCityList(City city) {
 
         for (City c : cityList) {
@@ -118,11 +115,7 @@ public abstract class CityManager {
                         boolean inCityList = isInCityList(ec);
                         if (inCityList != true) {
                             cityList.add(ec);
-<<<<<<< HEAD
                             onAddNewCity(ec);
-=======
-                            addNewCity(ec);
->>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
                         }
                     }
 
@@ -149,11 +142,7 @@ public abstract class CityManager {
                         boolean inCityList = isInCityList(ec);
                         if (inCityList != true) {
                             cityList.add(ec);
-<<<<<<< HEAD
                             onAddNewCity(ec);
-=======
-                            addNewCity(ec);
->>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
                         }
                     }
                 } catch (Exception ex) {
@@ -203,11 +192,7 @@ public abstract class CityManager {
 
                 if (city.cityCode.equals(newCity.cityCode)) {
 
-<<<<<<< HEAD
                     onCityStatusUpdate(i);
-=======
-                    cityStatusUpdate(i);
->>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
 
                     break;
                 }
@@ -217,14 +202,8 @@ public abstract class CityManager {
 
     }
 
-<<<<<<< HEAD
     public abstract void onCityStatusUpdate(int index);
 
     public abstract void onAddNewCity(City city);
-=======
-    public abstract void cityStatusUpdate(int index);
-
-    public abstract void addNewCity(City city);
->>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
 
 }

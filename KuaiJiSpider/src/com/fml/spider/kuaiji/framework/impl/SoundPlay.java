@@ -74,11 +74,7 @@ public class SoundPlay implements Sound {
             checkThread.start();
 
         } catch (Exception e) {
-<<<<<<< HEAD
            
-=======
-            e.printStackTrace();
->>>>>>> 763ab1f6614cb9d2fff901e103919a239b182cc5
         }
 
     }
