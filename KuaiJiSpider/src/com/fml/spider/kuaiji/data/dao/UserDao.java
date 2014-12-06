@@ -13,7 +13,9 @@ import java.util.List;
  * @author ky
  */
 public interface UserDao {
-    
+
     public List<User> getUsers();
-    
+
+    public boolean setUsers(List<User> users);
+
 }

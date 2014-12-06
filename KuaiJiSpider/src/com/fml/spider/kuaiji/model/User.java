@@ -14,13 +14,51 @@ public class User {
     String userName;
     String passWord;
     String cityCode;
-    boolean success = false;
-   
-    
+    boolean success;
+
     public User(String userName, String passWord, String cityCode) {
         this.userName = userName;
         this.passWord = passWord;
         this.cityCode = cityCode;
+    }
+
+    public User(String userName, String passWord, String cityCode, boolean success) {
+        this.userName = userName;
+        this.passWord = passWord;
+        this.cityCode = cityCode;
+        this.success = success;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassWord() {
+        return passWord;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+
+    public String getCityCode() {
+        return cityCode;
+    }
+
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
     @Override

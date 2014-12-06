@@ -17,23 +17,26 @@ import java.util.List;
  */
 public class UserServerImpl implements UserServer {
 
-    
     private UserDao userDao;
-    
+
     public UserServerImpl() {
-        
-        UserDao u=new UserDaoImpl();
-        
+
+        UserDao u = new UserDaoImpl();
+
     }
 
-    
-    
-    
     @Override
     public List<User> getUsers() {
-        
-         return userDao.getUsers();
-    
+
+        return userDao.getUsers();
+
     }
-    
+
+    @Override
+    public boolean setUsers(List<User> users) {
+
+        return userDao.setUsers(users);
+
+    }
+
 }

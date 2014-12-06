@@ -16,4 +16,6 @@ public interface UserServer {
 
     public List<User> getUsers();
 
+    public boolean setUsers(List<User>users);
+
 }
