@@ -41,7 +41,7 @@ public class KuaijiSpider implements Spider {
         String link_two = "http://www.hncz.gov.cn:8001/he-eams/Actions/Net/External/NetService/WebPersonalCompExamManageAction.do?method=enterCompExamNoticeTwo";
 
         String argee_link = "http://www.hncz.gov.cn:8001/he-eams/Actions/Net/External/NetService/WebPersonalCompExamManageAction.do?method=enterCompExamFourth";
-
+                           //
         System.out.println("进入报名页");
         Connection connect = Jsoup.connect(link_page);
         connect.header("User-Agent", header);
@@ -58,13 +58,7 @@ public class KuaijiSpider implements Spider {
         String pageToKen = parse.select("input[name=pageToKen]").attr("value");
         String pkRadios = cityCode;
 
-        //PAGE_NET_COMP_EXAM_SELECT_EXAM
-        //PAGE_NET_COMP_EXAM_SELECT_EXAM
-//        System.out.println("currentPage::" + currentPage);
-//        System.out.println("examTypeId::" + examTypeId);
-//        System.out.println("pageToKen::" + pageToKen);
-//        System.out.println("pkRadios::" + pkRadios);
-//        System.out.println("111=================");
+ 
         Map<String, String> datas = new HashMap<>();
 
         datas.put("currentPage", currentPage);
@@ -97,41 +91,29 @@ public class KuaijiSpider implements Spider {
             return new CityStatu(3, text); //考区座位已满
         } else {
 
-//            cookies.put("clientlanguage", "zh_CN");
-//            
-//            connect = Jsoup.connect(argee_link);
-//            connect.header("User-Agent", header);
-//            connect.header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-//            connect.header("Referer", "http://www.hncz.gov.cn:8001/he-eams/Actions/Net/External/NetService/WebPersonalCompExamManageAction.do?method=enterCompExamNoticeTwo");
-//            connect.header("Connection", "keep-alive");
-//            connect.header("Content-Type", "application/x-www-form-urlencoded");
-//            connect.header("Cookie", cookies.toString().replaceAll("\\{|\\}", ""));
-//            connect.header("Host", "www.hncz.gov.cn:8001");
-//            connect.header("Accept-Encoding", "gzip,deflate");
-//            connect.header("Accept-Language", "zh-CN,zh;q=0.8");
-//            connect.header("Cache-Control", "wmax-age=0");
-//
-//            connect.method(Method.POST);
-//            
-//            connect.cookies(cookies);
-//            System.out.println(cookies.toString().replaceAll("\\{|\\}", ""));
-//            Map<String, String> aggdatas = new HashMap<>();
-//
-//            aggdatas.put("pageToKen", pageToKen);
-//            aggdatas.put("currentPage", currentPage);
-//            aggdatas.put("notice", "");
-//
-//            System.out.println(aggdatas);
-//            connect.data(aggdatas);
-//
-//            execute = connect.execute();
-//
-//            System.out.println("同意报名");
-//            System.out.println("====================");
-//
-//            parse = Jsoup.parse(execute.body());
-//
-//            System.out.println(parse.text());
+      
+            connect = Jsoup.connect(argee_link);
+            connect.header("User-Agent", header);
+            connect.method(Method.POST);
+            connect.cookies(cookies);
+       
+            Map<String, String> aggdatas = new HashMap<>();
+
+            aggdatas.put("pageToKen", pageToKen);
+            aggdatas.put("currentPage", currentPage);
+            aggdatas.put("notice", "");
+            connect.data(aggdatas);
+
+            execute = connect.execute();
+            
+            System.out.println(execute.statusCode());
+
+            System.out.println("同意报名");
+            System.out.println("====================");
+
+            parse = Jsoup.parse(execute.body());
+
+            System.out.println(parse.text());
             System.out.println("=======" + text);
             return new CityStatu(0, "也许可以报名!");
         }
@@ -227,30 +209,11 @@ public class KuaijiSpider implements Spider {
 
     }
 
-    public void baoMing() throws IOException {
-
-//        String url = "http://www.hncz.gov.cn:8001/he-eams/Actions/Net/External/NetService/WebPersonalCompExamManageAction.do?method=enterCompExamFourth";
-//
-//        Connection connect = Jsoup.connect(url);
-//        connect.header("User-Agent", header);
-//        connect.method(Connection.Method.POST);
-//        connect.cookies(cookies);
-//
-//        Map<String, String> datas = new HashMap<>();
-//
-//        datas.put("currentPage", currentPage);
-//        datas.put("examSignManageVO.examTypeId:CompExam", examTypeId);
-//        datas.put("pageToKen", pageToKen);
-//        datas.put("pkRadios", pkRadios);
-//
-//        connect.data(datas);
-//
-//        Connection.Response execute = connect.execute();
-    }
+    
 
     public static void main(String[] args) throws Exception {
 
-        CityStatu tryConnect = new KuaijiSpider().tryConnect("5D52794C-C455-FBA2-B4F5-36CA1512A875");
+        CityStatu tryConnect = new KuaijiSpider().tryConnect("966B5A9F-3651-BC90-394E-AF49340877FA");
 
         System.out.println(tryConnect);
 
